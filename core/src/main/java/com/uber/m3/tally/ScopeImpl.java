@@ -197,8 +197,6 @@ class ScopeImpl implements Scope {
         for (Map.Entry<String, HistogramImpl> histogram : histograms.entrySet()) {
             histogram.getValue().report(fullyQualifiedName(histogram.getKey()), tags, reporter);
         }
-
-        reporter.flush();
     }
 
     // Serializes a map to generate a key for a prefix/map combination
@@ -362,6 +360,8 @@ class ScopeImpl implements Scope {
                 subscope.report(reporter);
             }
         }
+
+        reporter.flush();
     }
 
     class ReportLoop implements Runnable {
